@@ -7,7 +7,9 @@
 //
 
 #import "AppDelegate.h"
-
+#import "NiceChoiceVC.h"
+#import "AuthorVC.h"
+#import "DiscoveryVC.h"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +19,27 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    NiceChoiceVC * nice =[[NiceChoiceVC alloc] init];
+    UINavigationController * nav =[[UINavigationController alloc] initWithRootViewController:nice];
+    nav.title =@"精选";
+    nav.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:0];
+    
+    AuthorVC * author =[[AuthorVC alloc] init];
+    UINavigationController * nav2 =[[UINavigationController alloc] initWithRootViewController:author];
+    nav2.tabBarItem =[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemContacts tag:1];
+    
+    DiscoveryVC * discovery =[[DiscoveryVC alloc] init];
+    UINavigationController * nav3 =[[UINavigationController alloc] initWithRootViewController:discovery];
+    nav3.tabBarItem =[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostViewed tag:2];
+    
+    UITabBarController * tab =[[UITabBarController alloc] init];
+    tab.tabBar.tintColor =[UIColor blackColor];
+    tab.viewControllers =@[nav,nav3,nav2];
+    
+    _window.bounds = [UIScreen mainScreen].bounds;
+    _window.backgroundColor =[UIColor whiteColor];
+    _window.rootViewController = tab;
+    [_window makeKeyAndVisible];
     return YES;
 }
 
